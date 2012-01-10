@@ -1,0 +1,68 @@
+;(function($) {
+	$.myAutoSave = function(form, button, time) {
+		var autosave = {			
+			/*
+				Autosave form.
+			*/
+			form: null,
+			
+			/*
+				Autosave save button.
+			*/
+			button: null,
+			
+			/*
+				Timer object.
+			*/
+			timer: $.timer(function() {
+				autosave.beforeSave();
+				autosave.save();
+			}),
+			
+			init: function(form, button, time) {
+				autosave.form = form;
+				autosave.button = button; 
+				autosave.timer.set({
+					time: time,
+					autostart: false
+				});
+			},
+			
+			/*
+				Callback function that performs the saving call.
+			*/
+			save: function() {
+				$.jGrowl('Saving using auto-saving.');
+				$(autosave.form).submit();
+			},
+			
+			/*
+				Callback function called before saving.
+			*/
+			beforeSave: function() {
+				$(autosave.button).attr('disabled','disabled');
+				autosave.timer.stop();
+				$(autosave.form).bind('keypress',autosave.detect);
+			},
+			
+			/*
+				Callback function called when the form changes.
+			*/
+			detect: function(event) {
+				$(autosave.form).unbind('keypress');
+				$(autosave.button).removeAttr('disabled');
+				autosave.timer.play(true);
+				$.jGrowl('Form changed!');
+			}
+		};
+		
+		this.beforeSave = function() {
+			autosave.beforeSave();
+		};
+		
+		autosave.init(form,button,time);
+		$(form).bind('keypress',autosave.detect);
+		
+		return this;
+	};
+})(jQuery);

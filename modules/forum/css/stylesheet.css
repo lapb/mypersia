@@ -1,0 +1,295 @@
+/* margin 0 auto för centrering, bredd och lite annat satt */
+body{
+    width:960px;
+    margin:0 auto;
+    background-color:#A3C6E1;
+    color:#397EB3;
+    font-family:sans-serif;
+    font-size:12px;
+}
+
+header{
+    /*border:dashed #333333 1px;*/
+    margin:0px 0px;
+    padding:0px 0px;
+}
+
+header#main-header {
+	background-color: inherit;
+    color:#A3C6E1;
+}
+
+header > h1 {
+	border-top:solid #FFFFFF 10px;
+	border-left:solid #FFFFFF 10px;
+	border-right:solid #FFFFFF 10px;
+	padding-top:16px;
+	padding-bottom:16px;
+	padding-left:5px;
+	background-color:#142C3E;
+	color: inherit;
+	margin:0px;
+}
+
+header > nav {
+	background-color:#142C3E;
+	color: inherit;
+	border-top:solid #FFFFFF 4px;
+	border-left:solid #FFFFFF 10px;
+	border-right:solid #FFFFFF 10px;
+	border-bottom:solid #FFFFFF 6px; 
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:5px;
+	text-align:left;
+	margin:0px;
+}
+
+div.content {
+	background-color: #FFFFFF;
+	color: #000000;
+	padding-left:5px;
+	padding-right:5px;
+	margin:0px;
+}
+
+div.content-main {
+	border-left:solid #FFFFFF 10px;
+	border-right:solid #FFFFFF 10px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	padding-left: 5px;
+	margin:0px;
+}
+
+div.content-main h1 {
+	padding:0px;
+	margin:0px;
+}
+
+article > footer {
+	background-color: #FFFFFF;
+	color: inherit;
+	padding-left: 0px;
+	padding-right: 0px;
+	text-align: left;
+	font-style: italic;
+}
+
+body footer#body-footer {
+    border-left:solid #FFFFFF 5px;
+    border-right:solid #FFFFFF 5px;
+    border-bottom:solid #FFFFFF 10px;
+}
+
+footer {
+    padding:10px; 
+    text-align:center;
+    background-color:#142C3E;
+    color: inherit;
+}
+
+footer > nav {
+    text-align:center;
+    padding-bottom:10px;
+}
+
+/*header h1{
+    line-height:10px;
+}*/
+
+a{
+	background-color: inherit;
+    color:#397EB3;
+}
+
+a:hover{
+    text-decoration:none;
+}
+
+small{
+    margin-top:5px;
+    display:block;
+}
+
+hr {
+	color: #767676;
+	background-color: inherit;
+}
+
+.login {
+    margin-top:5px;
+    text-align:right;
+}
+
+.errorMessage {
+    background-color:#faa;
+    color: #F12619;
+    border:3px solid #767676;
+    padding-left:5px;
+    padding-right:5px;
+    padding-bottom:5px;
+    margin-left:5px;
+    margin-right:5px;
+    margin-bottom:5px;
+    text-align:center;
+    font-style:italic;
+}
+
+.notification {
+    background-color:#afa;
+    color: inherit;
+    border:3px solid #333;
+    padding:5px;
+    margin:5px;
+    text-align:center;
+    font-style:italic;
+}
+
+/*Source code related css*/
+div.sourcecode {
+	white-space: nowrap;
+	border: solid 1px #999;
+	background: #f9f9f9;
+	color: inherit;
+	padding: 0.5em 0.5em 0.5em 0.5em;
+	overflow:auto;
+}
+div.content-main > header > h1 {
+	background-color: #FFFFFF;
+	color: inherit;
+	padding:0px;
+	margin:0px;
+	border:none 0px #000000;
+}
+div.content-main > header > nav {}
+
+div.article {
+	float:left;
+	width: 500px;
+}
+
+div.article-sidebar {
+	float:right;
+}
+
+div.clear {
+	clear:both;
+}
+
+div.main {
+	float: left;
+	width: 650px;
+}
+
+div.sidebar {
+	float: left;
+	width: 275px;
+}
+
+h3.sidebar-header {
+	text-transform: uppercase;
+	border-bottom: double #000000 1px; 
+	padding-top: 0px;
+	margin-top: 0px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+textarea.create-a {
+	width: 300px;
+	height: 150px;
+}
+
+input.create-a {
+	width: 302px;
+}
+
+ul.article-list {
+	list-style-type: none;
+	padding-left: 0px;
+	margin-left: 0px;
+}
+
+th {
+	color: inherit;
+	background: #767676;
+}
+
+div.main td > a {
+	color: #000000;
+	background-color: inherit;
+}
+
+div.main > a {
+	color: #000000;
+	background-color: inherit;
+}
+
+div.post-link-container {
+	float: right;
+}
+
+div.topic-post-sidebar {
+	float: left;
+	width: 100px;
+}
+
+div.topic-post-content {
+	float: left;
+	width: 525px;
+}
+
+p.post-content {
+	float: left;
+	width: 500px;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+div.topic-post {
+	padding-bottom: 10px;
+	margin-bottom: 4px;
+	border-bottom: double #767676 2px;
+	width: 625px;
+}
+
+div.main > h1 {
+	padding-bottom: 10px;
+}
+
+p.indentation {
+	padding-left: 30px;
+}
+
+table#topics-list {
+	width:99%;
+	margin-bottom: 20px; 
+}
+
+/*Link colors*/
+
+/*
+	Since our javascript editor breaks if we set the link color for div.content, 
+	we use this workaround.
+*/
+
+div.main a {
+	color: #000000;
+	background-color: inherit;
+}
+
+div.main-content a {
+	color: #000000;
+	background-color: inherit;
+}
+
+a#post_link {
+	color: #000000;
+	background-color: inherit;
+}
+
+div.content > footer > a {
+	color: #397EB3;
+	background-color: inherit;
+}
