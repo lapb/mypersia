@@ -490,8 +490,8 @@
 		--
 		-- Add default user(s) 
 		--
-		CALL {$spCreateAccount}('admin', MD5('admin'));
-		CALL {$spCreateAccount}('doe', MD5('doe'));
+		CALL {$spCreateAccount}('admin', MD5('admin'), @created);
+		CALL {$spCreateAccount}('doe', MD5('doe'), @created);
 		
 		--
 		-- Add default groups 
@@ -502,10 +502,8 @@
 		--
 		-- Add default groupmembers
 		--
-		INSERT INTO {$tableGroupMember} (GroupMember_idUser, GroupMember_idGroup) 
-		VALUES ((SELECT idUser FROM {$tableUser} WHERE accountUser = 'doe'), 'usr');
-		INSERT INTO {$tableGroupMember} (GroupMember_idUser, GroupMember_idGroup) 
-		VALUES ((SELECT idUser FROM {$tableUser} WHERE accountUser = 'admin'), 'adm');
+		UPDATE {$tableGroupMember} SET GroupMember_idGroup='adm' WHERE GroupMember_idUser=  
+		(SELECT idUser FROM {$tableUser} WHERE accountUser = 'admin');
 EOD;
 
 	require_once TP_GLOBAL_SOURCEPATH.'CDatabaseController.php';
@@ -529,7 +527,7 @@ EOD;
 			{$query}
 		</p>
 		<p>
-			Number of successful statements: {$statements}/63
+			Number of successful statements: {$statements}/62
 		</p>
 		<p>
 			<a href="?p=index" style="text-decoration: underline;">Home</a>
