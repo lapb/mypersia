@@ -3,12 +3,13 @@
 		die('Direct access not allowed.');
 	
 	require_once TP_GLOBAL_SOURCEPATH.'CDatabaseController.php';
+	require_once TP_GLOBAL_SOURCEPATH.'CSecurityController.php';
 	
 	$db = CDatabaseController::getInstance();
+	$security = new CSecurityController();
 	
-	if(!isset($_SESSION['accountUser']) || $_SESSION['accountUser'] == '') {
-		$_SESSION['errorMessage'] = 'You must be logged in to access the administration page';
-		$_SESSION['redirect'] = 'admin';
+	if(!$security->isUserLoggedIn()) {
+		$_SESSION['redirect'] = 'admin&amp;m=core';
 		header('Location: ?p=login');
 		exit;
 	}
