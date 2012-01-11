@@ -121,7 +121,7 @@ EOD;
 EOD;
 			} else {
 				$htmlMenu = <<<EOD
-					<a href="?p=login" style="text-decoration: underline;">Login</a>
+					<a href="?p=login" style="text-decoration: underline;">Login or Create account</a>
 EOD;
 			}
 

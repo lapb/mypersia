@@ -4,7 +4,10 @@
 	
 	require_once TP_GLOBAL_SOURCEPATH.'CDatabaseController.php';
 	
-	if(!isset($_POST['nameUser']) || !isset($_POST['passwordUser'])) {
+	if((!isset($_POST['nameUser']) || !isset($_POST['passwordUser'])) 
+		&& (!isset($_SESSION['silentLoginUsername']) 
+			|| !isset($_SESSION['silentLoginPassword']))) {
+		
 		header('Location: '.WS_SITELINK.'?p=login');
 		exit;
 	}
@@ -16,8 +19,16 @@
 	else
 		$redirect = 'index';
 	
-	$user = $db->escapeString($_POST['nameUser']);
-	$password = $db->escapeString($_POST['passwordUser']);
+	if(!isset($_SESSION['silentLoginUsername']) || !isset($_SESSION['silentLoginPassword'])) {
+		$user = $db->escapeString($_POST['nameUser']);
+		$password = $db->escapeString($_POST['passwordUser']);
+	} else {
+		$user = $db->escapeString($_SESSION['silentLoginUsername']);
+		$password = $db->escapeString($_SESSION['silentLoginPassword']);
+		
+		unset($_SESSION['silentLoginUsername']);
+		unset($_SESSION['silentLoginPassword']);
+	}
 	
 	$userTable = DB_PREFIX.'User';
 	$groupMemberTable = DB_PREFIX.'GroupMember';

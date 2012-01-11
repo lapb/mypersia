@@ -25,6 +25,7 @@
 		
 		if(isset($_POST['password']) || $_POST['password'] == '') {
 			$password = hash('md5',$db->escapeString($_POST['password']));
+			$rawPassword = $db->escapeString($_POST['password']);
 		} else {
 			$_SESSION['errorMessage'] = 'Invalid password provided.';
 			header('Location: ?m=core&p=create-account');
@@ -61,7 +62,9 @@ EOD;
 		$row = $results[1]->fetch_assoc();
 		
 		if($row['created']) {
-			header('Location: ?m=core&p=login');
+			$_SESSION['silentLoginUsername'] = $username;
+			$_SESSION['silentLoginPassword'] = $rawPassword;
+			header('Location: ?m=core&p=loginp');
 		} else {
 			$_SESSION['errorMessage'] = 'Username already taken.';
 			header('Location: ?m=core&p=create-account');
