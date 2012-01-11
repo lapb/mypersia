@@ -20,11 +20,11 @@
 		  throughout the page.
 		*/
 		public static function getInstance() {
-			if(static::$instance == null) {
-				static::$instance = new CDatabaseController;
+			if($instance == null) {
+				$instance = new CDatabaseController;
 			}
 			
-			return static::$instance;
+			return $instance;
 		}
 		
 		public function query($query) {
