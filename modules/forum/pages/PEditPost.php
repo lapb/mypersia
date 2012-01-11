@@ -222,7 +222,7 @@ EOD;
 			'<script type="text/javascript" src="'.TP_MODULEPATH.'js/jquery.autosave/jquery.autosave.js"></script>',
 			'<link rel="stylesheet" type="text/css" href="'.TP_MODULEPATH.'css/markitup/skins/markitup/style.css" />',
 			'<link rel="stylesheet" type="text/css" href="'.TP_MODULEPATH.'css/markitup/sets/html/style.css" />',
-			'<link rel="stylesheet" type="text/css" href="'.TP_MODULEPATH.'css/JGrowl/jquery.jgrowl.css" />'
+			'<link rel="stylesheet" type="text/css" href="'.TP_MODULEPATH.'css/jGrowl/jquery.jgrowl.css" />'
 		);
 
 		require_once TP_GLOBAL_SOURCEPATH.'CHTMLPage.php';
