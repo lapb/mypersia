@@ -310,7 +310,7 @@
 			IN userId INT UNSIGNED
 		)
 		BEGIN
-			SELECT A.title, A.content, A.draftTitle, a.draftContent, A.isPublished, T.firstTopicPostId AS firstPostId FROM {$tableArticle} AS A JOIN {$tableTopicPost} AS TP ON TP.postId = A.id JOIN {$tableTopic} AS T ON T.id = TP.topicid JOIN {$tableUser} AS U ON U.idUser = userId WHERE A.id=postId AND {$fCheckUserIsOwnerOrAdmin}(postId,userId) LIMIT 1; 
+			SELECT A.title, A.content, A.draftTitle, A.draftContent, A.isPublished, T.firstTopicPostId AS firstPostId FROM {$tableArticle} AS A JOIN {$tableTopicPost} AS TP ON TP.postId = A.id JOIN {$tableTopic} AS T ON T.id = TP.topicid JOIN {$tableUser} AS U ON U.idUser = userId WHERE A.id=postId AND {$fCheckUserIsOwnerOrAdmin}(postId,userId) LIMIT 1; 
 		END;
 		
 		
