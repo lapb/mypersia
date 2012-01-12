@@ -30,31 +30,32 @@
 		unset($_SESSION['silentLoginPassword']);
 	}
 	
-	$userTable = DB_PREFIX.'User';
-	$groupMemberTable = DB_PREFIX.'GroupMember';
+	$spAuthenticateAccount = DB_PREFIX.'PAuthenticateAccount';
 	
-	$query = "SELECT idUser, accountUser, GroupMember_idGroup AS idGroup FROM {$userTable} AS U JOIN {$groupMemberTable} AS GM ON U.idUser = GM.GroupMember_idUser WHERE accountUser='{$user}' AND passwordUser='".md5($password)."'";
+	$query = <<<EOD
+		CALL {$spAuthenticateAccount}('{$user}', '{$password}', @status, @userId, @groupId);
+		SELECT @status AS status, @userId AS userId, @groupId AS groupId; 
+EOD;
 	
-	$result = $db->query($query) or die('Could not fetch required information'.$db->error);
-
-	$row = $result->fetch_assoc();
+	$db->multiQuery($query);
+		
+	$results = $db->retrieveAndStoreResultsFromMultiQuery($statements);
+	$row = $results[1]->fetch_assoc();
 	
 	require_once TP_GLOBAL_SOURCEPATH.'FDestroySession.php';
 	
 	session_start();
 	session_regenerate_id();
 
-	if($result->num_rows == 1) {
-		$_SESSION['idUser'] = $row['idUser'];
-		$_SESSION['accountUser'] = $row['accountUser'];
-		$_SESSION['groupMemberUser'] = $row['idGroup'];
+	if($row['status'] == 0) {
+		$_SESSION['idUser'] = $row['userId'];
+		$_SESSION['accountUser'] = $user;
+		$_SESSION['groupMemberUser'] = $row['groupId'];
 	} else {
 		$_SESSION['errorMessage']  = "Inloggningen misslyckades";
 		$_SESSION['redirect'] = $redirect;
 		$redirect = 'login';
 	}
-	
-	$result->close();
 	
 	header('Location: '.WS_SITELINK.'?p='.$redirect);
 ?>

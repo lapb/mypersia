@@ -28,6 +28,7 @@
 	$spCreateNewTopic    = DB_PREFIX . 'PCreateNewTopic';
 	$spUpdatePost  	 	 = DB_PREFIX . 'PUpdatePost';
 	$spCreateOrUpdatePost = DB_PREFIX . 'PCreateOrUpdatePost';
+	$spAuthenticateAccount = DB_PREFIX.'PAuthenticateAccount';
 	$spCreateAccount 	 = DB_PREFIX.'PCreateAccount';
 	$spGetAccountDetails = DB_PREFIX.'PGetAccountDetails';
 	$spUpdateAccountPassword = DB_PREFIX.'PUpdateAccountPassword';
@@ -61,6 +62,7 @@
 		DROP PROCEDURE IF EXISTS {$spCreateNewTopic};
 		DROP PROCEDURE IF EXISTS {$spUpdatePost};
 		DROP PROCEDURE IF EXISTS {$spCreateOrUpdatePost};
+		DROP PROCEDURE IF EXISTS {$spAuthenticateAccount};
 		DROP PROCEDURE IF EXISTS {$spCreateAccount};
 		DROP PROCEDURE IF EXISTS {$spGetAccountDetails};
 		DROP PROCEDURE IF EXISTS {$spUpdateAccountPassword};
@@ -409,6 +411,25 @@
 				WHERE id=aPostId;
 		END;
 		
+		CREATE PROCEDURE {$spAuthenticateAccount}
+		(
+			IN username VARCHAR(20),
+			IN password VARCHAR(32),
+			OUT status INT,
+			OUT userId INT UNSIGNED,
+			OUT groupId CHAR(3)
+		)
+		BEGIN
+			SELECT idUser INTO userId FROM {$tableUser} WHERE accountUser=username AND passwordUser=MD5(password);
+			SELECT GroupMember_idGroup INTO groupId FROM {$tableGroupMember} WHERE GroupMember_idUser=userId; 
+			
+			IF userId IS NULL THEN
+				SET status = 1;
+			ELSE
+				SET status = 0;
+			END IF;
+		END;
+		
 		CREATE PROCEDURE {$spCreateAccount}
 		(
 			 IN username VARCHAR(20),
@@ -527,7 +548,7 @@ EOD;
 			{$query}
 		</p>
 		<p>
-			Number of successful statements: {$statements}/62
+			Number of successful statements: {$statements}/64
 		</p>
 		<p>
 			<a href="?p=index" style="text-decoration: underline;">Home</a>
